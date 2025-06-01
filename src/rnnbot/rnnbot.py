@@ -75,7 +75,6 @@ class RnnBot(Bot):
                 min_length=self.min_length,
                 opts=self.options
             )
-
         return self.raw_rnn
 
 
@@ -157,6 +156,9 @@ class RnnBot(Bot):
                 m = accept_re.match(raw)
                 if m:
                     cleaned.append(raw)
+        if not cleaned:
+            print("No positive matches, bailing out")
+            sys.exit(-1)
         return cleaned
 
     # parse is for model-specific processing - used by AoM
@@ -273,7 +275,7 @@ class RnnBot(Bot):
             debugfile = self.logfile(ext)
             with open(debugfile, 'wt') as f:
                 if type(debug) == list:
-                    f.writelines('\n--\n'.join(debug))
+                    f.writelines('\n--\n'.join([str(d) for d in debug]))
                 else:
                     f.write(debug)
 
