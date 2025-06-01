@@ -17,13 +17,16 @@ DEFAULT_LINE = 140
 DEFAULT_LENGTH = 2000
 DEFAULT_MAXTIME = 60 * 60
 
+CPUS = 0.5
+
 
 class TorchRNN():
 
     def __init__(self, model_dir, model, script=DEFAULT_SCRIPT):
         self.cmd = [
-            "/usr/bin/docker", "run", "-t", "--rm", 
-            "--volume", f"{model_dir}:/models",
+            "/usr/bin/docker", "run", "-t",
+            "--cpus", str(CPUS),
+            "--rm", "--volume", f"{model_dir}:/models",
             DOCKER_IMAGE,
             TH, f"{TORCHRNN}/{script}", "-gpu", "-1",
         ]
