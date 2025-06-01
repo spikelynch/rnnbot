@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from rnnbot.rnbot import RnnBot
+from rnnbot.rnnbot import RnnBot
 from nltk.tokenize.punkt import PunktSentenceTokenizer, PunktParameters
 import re, random
 
